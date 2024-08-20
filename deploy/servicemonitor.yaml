@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: nodejs-express-apiserver
+  namespace: josh
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-express-apiserver
+  endpoints:
+  - port: 8080-tcp
+    interval: 5s
+    path: /metrics
+    scheme: http
