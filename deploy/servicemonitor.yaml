@@ -2,11 +2,11 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: nodejs-express-apiserver
-  namespace: josh
+  namespace: nodejs-demo
 spec:
   selector:
     matchLabels:
-      app: nodejs-express-apiserver
+      app.kubernetes.io/part-of: nodejs-express-apiserver-app
   endpoints:
   - port: 8080-tcp
     interval: 5s

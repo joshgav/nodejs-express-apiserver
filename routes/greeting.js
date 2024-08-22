@@ -3,7 +3,7 @@ var prom = require('prom-client');
 var router = express.Router();
 
 const requestCounter = new prom.Counter({
-  name: 'greeting_request_counter',
+  name: 'request_counter_greeting_page',
   help: 'count of greeting requests',
   labelNames: ['code'],
 });

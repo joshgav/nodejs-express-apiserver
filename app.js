@@ -6,6 +6,11 @@ var logger = require('morgan');
 var prom = require('prom-client');
 
 prom.collectDefaultMetrics();
+var requestCounter = new prom.Counter({
+  name: 'request_counter_all',
+  help: 'count of all requests',
+  labelNames: ['code'],
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  next();
+  requestCounter.inc({code: res.statusCode});
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
