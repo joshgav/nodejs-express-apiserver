@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: nodejs-apiserver
+  namespace: nodejs-apiserver
+spec:
+  to:
+    kind: Service
+    name: nodejs-apiserver
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  port:
+    targetPort: http

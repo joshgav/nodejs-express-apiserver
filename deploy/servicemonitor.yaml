@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: nodejs-express-apiserver
-  namespace: nodejs-demo
+  namespace: nodejs-apiserver
 spec:
   selector:
     matchLabels:

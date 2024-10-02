@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: nodejs-apiserver
+  name: nodejs-apiserver
+spec:
+  selector:
+    matchLabels:
+      app: nodejs-apiserver
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nodejs-apiserver
+    spec:
+      containers:
+        - name: nodejs-apiserver
+          image: 'quay.aws.joshgav.com/joshgav/nodejs-apiserver:latest'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
