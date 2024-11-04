@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nodejs-apiserver
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: nodejs-apiserver
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: deploy/openshift
+    repoURL: https://github.com/joshgav/nodejs-express-apiserver.git
+    targetRevision: main
+    kustomize: {}
+  syncPolicy:
+    automated: {}
