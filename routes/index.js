@@ -10,7 +10,7 @@ const requestCounter = new prom.Counter({
 
 router.get('/', function(req, res, next) {
   requestCounter.inc({code: 200});
-  res.render('index', { title: 'Josh\'s Demo Site' });
+  res.render('index', { title: 'Josh\'s Demo Site 2' });
 });
 
 module.exports = router;
