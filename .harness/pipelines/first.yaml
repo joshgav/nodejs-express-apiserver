@@ -34,9 +34,12 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: Run_1
-                  identifier: Run_1
+                  type: BuildAndPushDockerRegistry
+                  name: ContainerBuildAndPush
+                  identifier: ContainerBuildAndPush
                   spec:
-                    shell: Sh
-                    command: npm install
+                    connectorRef: quay
+                    repo: quay.io/joshgav/nodejs-express-apiserver
+                    tags:
+                      - quay.io/joshgav/nodejs-express-apiserver
+                    caching: true
