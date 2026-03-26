@@ -12,7 +12,7 @@ pipeline:
         build: <+input>
   stages:
     - stage:
-        name: npm-install
+        name: container-build-push
         identifier: npminstall
         description: ""
         type: CI
@@ -21,6 +21,7 @@ pipeline:
           caching:
             enabled: true
             override: true
+            paths: []
           buildIntelligence:
             enabled: true
           platform:
