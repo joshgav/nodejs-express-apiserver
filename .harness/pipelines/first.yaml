@@ -41,5 +41,5 @@ pipeline:
                     connectorRef: quay
                     repo: quay.io/joshgav/nodejs-express-apiserver
                     tags:
-                      - quay.io/joshgav/nodejs-express-apiserver
+                      - latest
                     caching: true
