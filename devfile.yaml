@@ -1,0 +1,37 @@
+schemaVersion: 2.3.0
+metadata:
+  generateName: nodejs-express-apiserver-
+components:
+  - name: runtime
+    container:
+      image: registry.access.redhat.com/ubi10/nodejs-24:latest
+      args: ['tail', '-f', '/dev/null']
+      mountSources: true
+      env:
+        - name: DEBUG_PORT
+          value: '5858'
+      endpoints:
+        - name: web
+          targetPort: 8080
+          protocol: http
+          exposure: public
+        - name: debug
+          targetPort: 5858
+          exposure: none
+commands:
+  - id: install
+    exec:
+      component: runtime
+      commandLine: npm install
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: build
+        isDefault: true
+  - id: run
+    exec:
+      component: runtime
+      commandLine: npm run start
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: run
+        isDefault: true
