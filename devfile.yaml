@@ -15,7 +15,7 @@ components:
       endpoints:
         - name: web
           targetPort: 8080
-          protocol: http
+          protocol: https
           exposure: public
         - name: debug
           targetPort: 5858
