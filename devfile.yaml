@@ -7,6 +7,8 @@ components:
       image: registry.access.redhat.com/ubi10/nodejs-24:latest
       args: ['tail', '-f', '/dev/null']
       mountSources: true
+      # expected location in this container
+      sourceMapping: /opt/app-root/src
       env:
         - name: DEBUG_PORT
           value: '5858'
