@@ -1,6 +1,6 @@
 schemaVersion: 2.3.0
 metadata:
-  generateName: nodejs-express-apiserver-
+  generateName: nodejs-express-apiserver
 components:
   - name: runtime
     container:
