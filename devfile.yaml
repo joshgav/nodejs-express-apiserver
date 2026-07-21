@@ -19,6 +19,11 @@ components:
         - name: debug
           targetPort: 5858
           exposure: none
+  - name: helper
+    container:
+      image: registry.access.redhat.com/ubi10/podman:latest
+      args: ['tail', '-f', '/dev/null']
+      mountSources: true
 commands:
   - id: install
     exec:
