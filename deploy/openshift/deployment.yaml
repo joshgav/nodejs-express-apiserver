@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: nodejs-apiserver
-  name: nodejs-apiserver
+  name: apiserver
 spec:
   selector:
     matchLabels:
-      app: nodejs-apiserver
+      app: nodejs-express-apiserver
   replicas: 3
   template:
     metadata:
       labels:
-        app: nodejs-apiserver
+        app: nodejs-express-apiserver
     spec:
       containers:
-        - name: nodejs-apiserver
-          image: 'quay.aws.joshgav.com/joshgav/nodejs-apiserver:latest'
+        - name: nodejs-express-apiserver
+          image: 'quay.io/joshgav/nodejs-express-apiserver:latest'
           ports:
             - containerPort: 8080
               protocol: TCP

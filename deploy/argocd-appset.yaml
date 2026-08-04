@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nodejs-express-apiserver
+  namespace: openshift-gitops
+spec:
+  generators:
+    # defines the PlacementDecision to be referenced
+    - clusterDecisionResource:
+        # defines the specific GVK to be referenced
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: nodejs-express-apiserver-placement
+        requeueAfterSeconds: 60
+  template:
+    metadata:
+      name: nodejs-express-apiserver-{{name}}
+      labels:
+        velero.io/exclude-from-backup: "true"
+    spec:
+      project: default
+      sources:
+        - repositoryType: git
+          repoURL: https://github.com/joshgav/nodejs-express-apiserver.git
+          targetRevision: main
+          path: deploy/openshift
+          kustomize: {}
+      destination:
+        namespace: nodejs-express-apiserver
+        server: "{{server}}"
+      syncPolicy:
+        automated:
+          enabled: true
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - PruneLast=true
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  name: nodejs-express-apiserver-placement
+  namespace: openshift-gitops
+spec:
+  tolerations:
+    - key: cluster.open-cluster-management.io/unreachable
+      operator: Exists
+    - key: cluster.open-cluster-management.io/unavailable
+      operator: Exists
+  clusterSets:
+    - global
