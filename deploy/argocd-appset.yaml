@@ -5,10 +5,11 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    # defines the PlacementDecision to be referenced
     - clusterDecisionResource:
-        # defines the specific GVK to be referenced
+        # configMapRef refers to a ConfigMap with GVK/schema to search for (i.e., PlacementDecision)
+        #   for us - PlacementDecision.cluster.open-cluster-management.io/v1
         configMapRef: acm-placement
+        # labelSelector selects a specific instance of GVK PlacementDecision
         labelSelector:
           matchLabels:
             cluster.open-cluster-management.io/placement: nodejs-express-apiserver-placement
